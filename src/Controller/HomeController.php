@@ -61,4 +61,49 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+    /**
+     * @Route("/admin", name="admin")
+     */
+    public function admin()
+    {
+        return $this->render('home/temporaire/admin.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
+    /**
+     * @Route("/profil", name="profil")
+     */
+    public function profil()
+    {
+        return $this->render('home/temporaire/profil.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
+    /**
+     * @Route("/group/add", name="group_add")
+     */
+    public function groupAdd()
+    {
+        return $this->render('home/temporaire/group-add.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
+    /**
+     * @Route("/group/edit", name="group_edit")
+     */
+    public function groupEdit()
+    {
+        return $this->render('home/temporaire/group-edit.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
+    /**
+     * @Route("/users", name="users")
+     */
+    public function users()
+    {
+        return $this->render('home/temporaire/users.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 }
