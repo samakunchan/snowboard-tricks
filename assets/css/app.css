@@ -1,0 +1,65 @@
+@media (min-width: 800px) and (max-width: 850px) {
+    .navbar:not(.top-nav-collapse) {
+        background: #1C2331;
+    }
+}
+.carousel,
+.carousel .carousel-inner,
+.carousel .carousel-inner .active,
+.carousel .carousel-inner .carousel-item,
+.view,
+body,
+html {
+    height:100%
+}
+.navbar {
+    background-color:rgba(0,0,0,.2)
+}
+.page-footer,
+.top-nav-collapse {
+    background-color:#1C2331
+}
+@media only screen and (max-width:768px) {
+    .navbar{
+        background-color:#1C2331
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1360px;
+    }
+}
+#carousel-thumb .single-trick-indicator li{
+    width: initial;
+    height: initial;
+    text-indent: initial;
+}
+.mt--1{
+    margin-top: -10px;
+}
+.mt--2{
+    margin-top: -20px;
+}
+.mt--3{
+    margin-top: -30px;
+}
+.mt--4{
+    margin-top: -40px;
+}
+.mt--5{
+    margin-top: -50px;
+}
+.bg-indigo{
+    background-color: #3f51b5;
+}
+.ajouter-figure{
+    cursor: pointer;
+}
+.ajouter-figure i {
+    font-size: 150px;
+}
+.ajouter-figure:hover i {
+    color: white;
+    font-size: 150px;
+    transition-duration: .5s;
+}
