@@ -6,7 +6,7 @@
 [![Techno Badge](https://img.shields.io/badge/Technology-Symfony5-blue)](https://www.php.net/docs.php)
 [![Composer Badge](https://img.shields.io/badge/Dependency-Composer-lightgrey)](https://www.php.net/docs.php)
 
-## Projet 6 OpenClassroom- Snowboard Tricks.
+## Projet 6 OpenClassroom - Snowboard Tricks.
 
 ![center](https://www.adventureconseil.com/wp-content/uploads/2019/01/openclassrooms.jpg)
 ![center](http://www.diapason-info.com/wp-content/uploads/2014/07/symfony_logo.png)
