@@ -44,24 +44,6 @@ class HomeController extends AbstractController
         ]);
     }
     /**
-     * @Route("/login", name="login")
-     */
-    public function login()
-    {
-        return $this->render('home/temporaire/login.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-    /**
-     * @Route("/register", name="register")
-     */
-    public function register()
-    {
-        return $this->render('home/temporaire/register.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-    /**
      * @Route("/admin", name="admin")
      */
     public function admin()
