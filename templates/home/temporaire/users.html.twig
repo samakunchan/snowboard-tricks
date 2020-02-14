@@ -1,0 +1,154 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}-Admin{% endblock %}
+
+{% block body %}
+<div class="container-for-admin">
+    <!--Main layout-->
+    <main class="pt-5 row">
+        <div class="container-fluid mt-5" style="max-width: 1440px; margin: 0 auto">
+    <div class="position-relative">
+        <h1>Listes des utilisateurs</h1>
+    </div>
+    <!--Grid row-->
+    <article class="wow fadeIn">
+        <div class="row">
+            <!-- Table with panel -->
+            <div class="card card-cascade narrower col-lg-12">
+                <div class="px-4">
+                    <div class="table-wrapper">
+                        <!--Table-->
+                        <table class="table table-hover mb-0">
+                            <!--Table head-->
+                            <thead>
+                            <tr>
+                                <th>
+                                    <label class="form-check-label mr-2 label-table" for="checkbox"></label>
+                                </th>
+                                <th class="th-lg">
+                                    <a href="javascript:void(0)">Titre</a>
+                                </th>
+                                <th class="th-lg">
+                                    <a href="javascript:void(0)">Description</a>
+                                </th>
+                                <th class="th-lg">
+                                    <a href="javascript:void(0)">Groupe</a>
+                                </th>
+                                <th class="th-lg">
+                                    <a href="javascript:void(0)">Nombre d'images/videos</a>
+                                </th>
+                                <th class="th-lg">
+                                    <a href="javascript:void(0)">Action</a>
+                                </th>
+                            </tr>
+                            </thead>
+                            <!--Table head-->
+                            <!--Table body-->
+                            <tbody>
+                            <tr>
+                                <th scope="row">
+                                    <input class="form-check-input" type="checkbox" id="checkbox1">
+                                    <label class="form-check-label label-table" for="checkbox1"></label>
+                                </th>
+                                <td>Front flip</td>
+                                <td>Lorem ipsum.</td>
+                                <td>Facile</td>
+                                <td>3</td>
+                                <td>
+                                    <a href="javascript:void(0)" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input class="form-check-input" type="checkbox" id="checkbox2">
+                                    <label class="form-check-label label-table" for="checkbox2"></label>
+                                </th>
+                                <td>Back Flip</td>
+                                <td>Lorem ipsum.</td>
+                                <td>Facile</td>
+                                <td>5</td>
+                                <td>
+                                    <a href="javascript:void(0)" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input class="form-check-input" type="checkbox" id="checkbox3">
+                                    <label class="form-check-label label-table" for="checkbox3"></label>
+                                </th>
+                                <td>360</td>
+                                <td>Lorem ipsum.</td>
+                                <td>Confirmé</td>
+                                <td>4</td>
+                                <td>
+                                    <a href="javascript:void(0)" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input class="form-check-input" type="checkbox" id="checkbox4">
+                                    <label class="form-check-label label-table" for="checkbox4"></label>
+                                </th>
+                                <td>180</td>
+                                <td>Lorem ipsum.</td>
+                                <td>Difficile</td>
+                                <td>5</td>
+                                <td>
+                                    <a href="javascript:void(0)" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input class="form-check-input" type="checkbox" id="checkbox4">
+                                    <label class="form-check-label label-table" for="checkbox4"></label>
+                                </th>
+                                <td>180</td>
+                                <td>Lorem ipsum.</td>
+                                <td>Difficile</td>
+                                <td>5</td>
+                                <td>
+                                    <a href="javascript:void(0)" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <input class="form-check-input" type="checkbox" id="checkbox4">
+                                    <label class="form-check-label label-table" for="checkbox4"></label>
+                                </th>
+                                <td>180</td>
+                                <td>Lorem ipsum.</td>
+                                <td>Difficile</td>
+                                <td>5</td>
+                                <td>
+                                    <a href="javascript:void(0)" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <!--Table body-->
+                        </table>
+                        <!--Table-->
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- Table with panel -->
+        </div>
+    </article>
+    <!--Grid row-->
+        </div>
+    </main>
+</div>
+{% endblock %}
