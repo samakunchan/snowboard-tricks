@@ -40,7 +40,20 @@
                             <a class="nav-link" href="{{ path('login') }}">Authentification</a>
                         </li>
                     </ul>
-
+                    {% if app.user %}
+                        <!-- Right -->
+                        <ul class="navbar-nav nav-flex-icons">
+                            <li class="nav-item">
+                                <a href="{{ path('profil') }}">
+                                    <img
+                                            class="rounded"
+                                            src="https://eu.ui-avatars.com/api/?name={{app.user.firstname}}+{{app.user.lastname}}&background=0D8ABC&color=fff"
+                                            alt="Initial de l'utilisateur"
+                                            width="50">
+                                </a>
+                            </li>
+                        </ul>
+                    {% endif %}
                 </div>
             </div>
         </nav>
