@@ -83,10 +83,10 @@ class HomeController extends AbstractController
     /**
      * @Route("/users", name="users")
      */
-    public function users()
-    {
-        return $this->render('home/temporaire/users.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
+    // public function users()
+    // {
+    //     return $this->render('home/temporaire/users.html.twig', [
+    //         'controller_name' => 'HomeController',
+    //     ]);
+    // }
 }
