@@ -1,0 +1,23 @@
+<div class="card-body px-lg-5 pt-0">
+    {{ form_start(form) }}
+        <div class="form-row">
+            <div class="col">
+                <!-- First name -->
+                <div class="md-form">
+                    {{ form_widget(form.title, { 'attr': {'class': 'form-control'} }) }}
+                    <label for="register_pseudo">Nom du groupe</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <!-- First name -->
+                <div class="md-form">
+                    {{ form_widget(form.icone, { 'attr': {'class': 'form-control'} }) }}
+                    <label for="register_pseudo">Icone url</label>
+                </div>
+            </div>
+        </div>
+        <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+</div>

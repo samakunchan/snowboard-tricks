@@ -72,46 +72,19 @@
                                 <h2>Listes des groupes</h2>
                                 <!-- List group links -->
                                 <div class="list-group list-group-flush">
-                                    <a href="{{ path('trick_group_edit', {'name': 'front'}) }}" class="list-group-item list-group-item-action waves-effect">Front
-                                        <span class="badge badge-danger badge-pill pull-right float-right">
+                                    {% for group in trick_groups %}
+                                        <a href="{{ path('trick_group_edit', {'id': group.id}) }}" class="list-group-item list-group-item-action waves-effect">
+                                        <img src="{{ group.icone }}" alt="Icone" width="20" class="mr-2">
+                                            {{ group.title | title }}
+                                            <span class="badge badge-danger badge-pill pull-right float-right">
                                             <i class="fa fa-trash"></i>
                                         </span>
-                                        <span class="badge badge-info badge-pill pull-right float-right">
+                                            <span class="badge badge-info badge-pill pull-right float-right">
                                             <i class="fa fa-pen"></i>
                                         </span>
-                                    </a>
-                                    <a href="{{ path('trick_group_edit', {'name': 'front'}) }}" class="list-group-item list-group-item-action waves-effect">Back
-                                        <span class="badge badge-danger badge-pill pull-right float-right">
-                                            <i class="fa fa-trash"></i>
-                                        </span>
-                                        <span class="badge badge-info badge-pill pull-right float-right">
-                                            <i class="fa fa-pen"></i>
-                                        </span>
-                                    </a>
-                                    <a href="{{ path('trick_group_edit', {'name': 'front'}) }}" class="list-group-item list-group-item-action waves-effect">Styles
-                                        <span class="badge badge-danger badge-pill pull-right float-right">
-                                            <i class="fa fa-trash"></i>
-                                        </span>
-                                        <span class="badge badge-info badge-pill pull-right float-right">
-                                            <i class="fa fa-pen"></i>
-                                        </span>
-                                    </a>
-                                    <a href="{{ path('trick_group_edit', {'name': 'front'}) }}" class="list-group-item list-group-item-action waves-effect">Fun
-                                        <span class="badge badge-danger badge-pill pull-right float-right">
-                                            <i class="fa fa-trash"></i>
-                                        </span>
-                                        <span class="badge badge-info badge-pill pull-right float-right">
-                                            <i class="fa fa-pen"></i>
-                                        </span>
-                                    </a>
-                                    <a href="{{ path('trick_group_edit', {'name': 'front'}) }}" class="list-group-item list-group-item-action waves-effect">Hight level
-                                        <span class="badge badge-danger badge-pill pull-right float-right">
-                                            <i class="fa fa-trash"></i>
-                                        </span>
-                                        <span class="badge badge-info badge-pill pull-right float-right">
-                                            <i class="fa fa-pen"></i>
-                                        </span>
-                                    </a>
+                                        </a>
+                                    {% endfor %}
+
                                 </div>
                                 <!-- List group links -->
 
