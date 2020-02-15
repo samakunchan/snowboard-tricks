@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit TrickGroup{% endblock %}
+
+{% block body %}
+    <div class="container-for-admin">
+        <!--Main layout-->
+        <div class="container-for-admin">
+            <!--Main layout-->
+            <main class="pt-5">
+                <div class="container-fluid mt-5" style="max-width: 1440px; margin: 0 auto">
+                    <a href="{{ path('admin') }}" class="btn btn-outline-info btn-rounded my-4 waves-effect ">
+                        Retour
+                    </a>
+                    <div class="position-relative">
+                        <h1>Modifier un groupe</h1>
+                    </div>
+                    {{ include('trick_group/_form.html.twig') }}
+                </div>
+            </main>
+        </div>
+    </div>
+
+    {{ include('trick_group/_delete_form.html.twig') }}
+{% endblock %}

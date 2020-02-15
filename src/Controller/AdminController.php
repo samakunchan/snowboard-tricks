@@ -2,48 +2,27 @@
 
 namespace App\Controller;
 
+use App\Repository\TrickGroupRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/admin")
+ */
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/", name="admin")
+     * @param TrickGroupRepository $trickGroupRepository
+     * @return Response
      */
-    public function index()
-    {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
-    }
-    /**
-     * @Route("/admin", name="admin")
-     */
-    public function admin()
+    public function index(TrickGroupRepository $trickGroupRepository): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         // TODO Il faudra un findAll Trick
-        // TODO Il faudra un findAll TrickGroup
         return $this->render('admin/index.html.twig', [
-
+            'trick_groups' => $trickGroupRepository->findAll(),
         ]);
     }
-    // /**
-    //  * @Route("/group/add", name="group_add")
-    //  */
-    // public function groupAdd()
-    // {
-    //     return $this->render('home/temporaire/group-add.html.twig', [
-    //         'controller_name' => 'HomeController',
-    //     ]);
-    // }
-    // /**
-    //  * @Route("/group/edit", name="group_edit")
-    //  */
-    // public function groupEdit()
-    // {
-    //     return $this->render('home/temporaire/group-edit.html.twig', [
-    //         'controller_name' => 'HomeController',
-    //     ]);
-    // }
 }
