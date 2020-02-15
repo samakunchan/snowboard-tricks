@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,6 +25,25 @@ class UserController extends AbstractController
     {
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/profil", name="profil")
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
+    public function profil(Request $request)
+    {
+        $form = $this->createForm(UserType::class, $this->getUser());
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('user/profil.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 
