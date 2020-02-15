@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}-Auth{% endblock %}
+
+{% block body %}
+    <section class="mt-5 p-5 wow fadeIn" style="max-width: 800px; margin: 0 auto">
+        <!-- Material form register -->
+        <div class="card">
+
+            <h5 class="card-header info-color white-text text-center py-4">
+                <strong>Inscription</strong>
+            </h5>
+
+            <!--Card content-->
+            <div class="card-body px-lg-5 pt-0">
+
+                <!-- Form -->
+                {{ form_start(form) }}
+
+                <div class="form-row">
+                    <div class="col">
+                        <!-- First name -->
+                        <div class="md-form">
+                            {{ form_widget(form.firstname, { 'attr': {'class': 'form-control'} }) }}
+                            <label for="register_pseudo">Firstname</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <!-- First name -->
+                        <div class="md-form">
+                            {{ form_widget(form.lastname, { 'attr': {'class': 'form-control'} }) }}
+                            <label for="register_pseudo">Lastname</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- E-mail -->
+                <div class="md-form mt-0">
+                    {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                    <label for="register_email">Email</label>
+                </div>
+
+                <!-- Password -->
+                <div class="md-form">
+                    {{ form_widget(form.password.first, { 'attr': {'class': 'form-control'} }) }}
+                    <label for="register_password_first">Mot de passe</label>
+                    <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                        Au moins 6 lettres et 1 chiffre
+                    </small>
+                </div>
+                <!-- Password -->
+                <div class="md-form">
+                    {{ form_widget(form.password.second, { "attr": {"class": "form-control"} }) }}
+                    <label for="register_password_second">Confirmer le mot de passe</label>
+                </div>
+
+
+
+                <!-- Terms of service -->
+                <p>En cliquant sur <strong>S'inscrire</strong>, vous acceptez les termes des
+                    <a href="" target="_blank">conditions générales.</a>
+                    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0'}}) }}
+                    {{ form_end(form) }}
+                    <!-- Form -->
+                <hr>
+                <p class="text-center">Inscription sécurisé</p>
+
+            </div>
+
+        </div>
+        <!-- Material form register -->
+    </section>
+{% endblock %}
