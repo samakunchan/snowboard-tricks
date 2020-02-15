@@ -17,6 +17,11 @@ security:
         main:
             anonymous: lazy
             provider: app_user_provider
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 31536000 #604800 # 1 week in seconds
+                path: /
+                token_provider: 'Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider'
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator

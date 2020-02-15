@@ -48,6 +48,7 @@ class HomeController extends AbstractController
      */
     public function admin()
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
         return $this->render('home/temporaire/admin.html.twig', [
             'controller_name' => 'HomeController',
         ]);
