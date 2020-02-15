@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+<div class="container-for-admin">
+    <!--Main layout-->
+    <main class="pt-5 row">
+        <div class="container-fluid mt-5" style="max-width: 1440px; margin: 0 auto">
+            <div class="row align-items-center">
+                <a href="{{ path('user_index') }}" class="btn btn-outline-info btn-rounded my-4 waves-effect ">
+                    Retour
+                </a>
+                {% if user.roles[0] is not same as('ROLE_ADMIN') %}
+                    {{ include('user/_delete_form.html.twig') }}
+                {% endif %}
+            </div>
+            <h1>Mettre à jour l'utilisateur: {{ user.firstname }} {{ user.lastname }}</h1>
+
+            <!--Card content-->
+            <div class="card-body px-lg-5 pt-0">
+
+                <!-- Form -->
+                {{ form_start(form) }}
+
+                <div class="form-row">
+                    <div class="col">
+                        <!-- First name -->
+                        <div class="md-form">
+                            {{ form_widget(form.firstname, { 'attr': {'class': 'form-control'} }) }}
+                            <label for="register_pseudo">Firstname</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <!-- First name -->
+                        <div class="md-form">
+                            {{ form_widget(form.lastname, { 'attr': {'class': 'form-control'} }) }}
+                            <label for="register_pseudo">Lastname</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- E-mail -->
+                <div class="md-form mt-0">
+                    {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                    <label for="register_email">Email</label>
+                </div>
+
+                    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0'}}) }}
+                    {{ form_end(form) }}
+                    <!-- Form -->
+            </div>
+        </div>
+    </main>
+</div>
+
+{% endblock %}

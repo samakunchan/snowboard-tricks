@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}-Utilisateur{% endblock %}
+
+{% block body %}
+    <div class="container-for-admin">
+        <!--Main layout-->
+        <main class="pt-5 row">
+            <div class="container-fluid mt-5" style="max-width: 1440px; margin: 0 auto">
+                <a href="{{ path('admin') }}" class="btn btn-outline-info btn-rounded my-4 waves-effect ">
+                    Retour
+                </a>
+                <div class="position-relative">
+                    <h1>Listes des utilisateurs</h1>
+                </div>
+                <!--Grid row-->
+                <article class="wow fadeIn">
+                    <div class="row">
+                        <!-- Table with panel -->
+                        <div class="card card-cascade narrower col-lg-12">
+                            <div class="px-4">
+                                <div class="table-wrapper">
+                                    <!--Table-->
+                                    <table class="table table-hover mb-0">
+                                        <!--Table head-->
+                                        <thead>
+                                        <tr>
+                                            <th class="th-lg">
+                                                <a href="javascript:void(0)">Firstname</a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a href="javascript:void(0)">Lastname</a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a href="javascript:void(0)">Email</a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a href="javascript:void(0)">Role</a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a href="javascript:void(0)">Inscris le</a>
+                                            </th>
+                                            <th class="th-lg">
+                                                <a href="javascript:void(0)">Action</a>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <!--Table head-->
+                                        <!--Table body-->
+                                        <tbody>
+                                        {% for user in users %}
+                                            <tr>
+                                                <td>{{ user.firstname | title }}</td>
+                                                <td>{{ user.lastname | title }}</td>
+                                                <td>{{ user.email }}</td>
+                                                <td>{{ user.roles[0] }}</td>
+                                                <td>{{ user.createdAt | date }}</td>
+                                                <td>
+                                                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
+                                                    {% if user.roles[0] is not same as('ROLE_ADMIN') %}
+                                                        <a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                        <!--Table body-->
+                                    </table>
+                                    <!--Table-->
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!-- Table with panel -->
+                    </div>
+                </article>
+                <!--Grid row-->
+                {#
+                <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                    <ul class="pagination pg-blue">
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1">Previous</a>
+                        </li>
+                        {% for page in range(1, pagination) %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="{{ path('user_index', {'page': page}) }}">
+                                    {{ page }}
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                        <li class="page-item">
+                            <a class="page-link">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+                #}
+            </div>
+
+        </main>
+    </div>
+{% endblock %}
