@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Trick{% endblock %}
+
+{% block body %}
+    <div class="container-for-admin">
+        <!--Main layout-->
+        <div class="container-for-admin">
+            <!--Main layout-->
+            <main class="pt-5">
+                <div class="container-fluid mt-5" style="max-width: 1440px; margin: 0 auto">
+                    <a href="{{ path('home') }}" class="btn btn-outline-info btn-rounded my-4 waves-effect ">
+                        Retour
+                    </a>
+                    <div class="position-relative">
+                        <h1>Edit Trick</h1>
+                    </div>
+                    <div class="card-body px-lg-5 pt-0">
+                        {{ form_start(form, {'attr': {'id': 'form'}}) }}
+                        <div class="form-row">
+                            <div class="col">
+                                <!-- First name -->
+                                <div class="md-form">
+                                    {{ form_widget(form.title, { 'attr': {'class': 'form-control'} }) }}
+                                    <label for="register_pseudo">Titre</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <!-- First name -->
+                                <div class="md-form">
+                                    {{ form_widget(form.description, { 'attr': {'class': 'form-control'} }) }}
+                                    <label for="register_pseudo">Description</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="md-form">
+                                    {{ form_widget(form.trick_group, { 'attr': {'class': 'form-control'} }) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-lg-6">
+                                {{ form_label(form.images, 'Images', {'label_attr': {'style': 'font-weight: bold'}}) }}
+                                {% for image in form.images %}
+                                    <div class="previous-img-{{ loop.index -1 }}">
+                                        <img src="{{ asset('uploads/' ~ image.vars.data.completeUrl) }}" alt="Image" width="300">
+                                        {{ form_errors(image) }}
+                                        {{ form_widget(image, { 'attr': {'class': 'image-edit'} }) }}
+                                    </div>
+                                {% endfor %}
+                                <a href="javascript:void(0)" id="add_image" class="btn btn-default">Ajouter une image</a>
+                            </div>
+                            <div class="col-lg-6">
+                                {{ form_errors(form.videos) }}
+                                {{ form_label(form.videos, 'Videos', { 'attr': {'class': 'form-control'} }) }}
+                                {{ form_widget(form.videos) }}
+                                <a href="javascript:void(0)" id="add_video" class="btn btn-default">Ajouter une video</a>
+                            </div>
+                        </div>
+
+                        <button class="btn">{{ button_label|default('Save') }}</button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('js/nested-form-image-edit') }}
+    {{ encore_entry_script_tags('js/nested-form-video-add') }}
+{% endblock %}
