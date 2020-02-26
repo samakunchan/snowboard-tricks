@@ -24,7 +24,10 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry("app", "./assets/js/app.js")
-    //.addEntry("page1", "./assets/js/page1.js")
+    .addEntry("js/nested-form-image-add", "./assets/js/add-image.js")
+    .addEntry("js/nested-form-video-add", "./assets/js/add-video.js")
+    .addEntry("js/nested-form-image-edit", "./assets/js/edit-image.js")
+    .addEntry("js/nested-form-video-edit", "./assets/js/edit-video.js")
     //.addEntry("page2", "./assets/js/page2.js")
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
