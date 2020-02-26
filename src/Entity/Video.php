@@ -28,12 +28,12 @@ class Video
     private $src;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
 
@@ -41,6 +41,7 @@ class Video
      * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="videos")
      */
     private $trick;
+
 
     public function getId(): ?int
     {

@@ -5,25 +5,30 @@
 {% block body %}
     <!--Carousel Wrapper-->
     <section style="max-width: 1440px; margin: 50px auto">
-        <h2 class="text-center p-5">Titre de la figure</h2>
+        <h2 class="text-center p-5">{{ trick.title | title }}</h2>
         <article class="row">
             <aside class="col-lg-8">
                 <!--Carousel Wrapper-->
                 <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel" style="height: unset;">
                     <!--Slides-->
                     <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(88).jpg"
-                                 alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(121).jpg"
-                                 alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(31).jpg"
-                                 alt="Third slide">
-                        </div>
+                        {% for image in trick.images %}
+                            <div class="carousel-item {% if loop.index is same as(1) %} active {% endif %}">
+                                <img class="d-block w-100"
+                                     src="{{ asset('uploads/' ~ image.completeUrl) }}"
+                                     alt="slide{{ loop.index }}">
+                            </div>
+                        {% endfor %}
+                        {% for video in trick.videos %}
+                            <div class="carousel-item">
+                                <iframe width="800"
+                                        height="500"
+                                        src="https://www.youtube.com/embed/{{ video.src }}"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                            </div>
+                        {% endfor %}
                     </div>
                     <!--/.Slides-->
                     <!--Controls-->
@@ -40,31 +45,23 @@
                 <!--/.Carousel Wrapper-->
                 <!--/.Controls-->
                 <ol class="d-flex justify-content-center list-inline single-trick-indicator p-3">
-                    <li data-target="#carousel-thumb" data-slide-to="0" class="active">
-                        <img src="https://mdbootstrap.com/img/Photos/Others/Carousel-thumbs/img%20(88).jpg" alt="Image à cliquer" width="150">
-                    </li>
-                    <li data-target="#carousel-thumb" data-slide-to="1">
-                        <img src="https://mdbootstrap.com/img/Photos/Others/Carousel-thumbs/img%20(121).jpg" alt="Image à cliquer" width="150">
-                    </li>
-                    <li data-target="#carousel-thumb" data-slide-to="2">
-                        <img src="https://mdbootstrap.com/img/Photos/Others/Carousel-thumbs/img%20(31).jpg" alt="Image à cliquer" width="150">
-                    </li>
+                    {% for image in trick.images %}
+                        <li data-target="#carousel-thumb" data-slide-to="{{ loop.index -1 }}" class="active">
+                            <img src="{{ asset('uploads/' ~ image.completeUrl) }}" width="200" alt="Indicator{{ loop.index }}">
+                        </li>
+                    {% endfor %}
+                    {% for video in trick.videos %}
+                        <li data-target="#carousel-thumb" data-slide-to="{{ (loop.index -1) + trick.images | length }}" class="active">
+                            <img src="https://img.youtube.com/vi/{{ video.src }}/default.jpg" width="200" alt="Indicator video {{ video.title }}">
+                        </li>
+                    {% endfor %}
                 </ol>
             </aside>
             <div class="col-lg-4">
                 <h2>Description</h2>
-                <div class="description">
-                    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid iure qui quidem tenetur voluptatem! Eaque, error eveniet harum laudantium nisi pariatur repellendus veritatis
-                        voluptatum! At dolores exercitationem expedita laboriosam optio.
-                    </div>
-                    <div>Adipisci aliquid aspernatur, assumenda debitis earum eligendi id maiores neque perferendis quaerat quis tempora, voluptas? Alias animi debitis dolorem expedita explicabo
-                        fugiat id impedit quasi reiciendis ut? Deserunt, molestiae, molestias.
-                    </div>
-                    <div>Dolores exercitationem explicabo incidunt iure minus officia sapiente suscipit temporibus tenetur voluptatum. Ad aperiam consequatur dolor doloremque earum eos non obcaecati
-                        pariatur porro praesentium quod repellendus reprehenderit, temporibus veniam voluptas!
-                    </div>
-                </div>
+                <div class="description">{{ trick.description }}</div>
             </div>
+            <em>Par: <strong>{{ trick.createdBy.firstname }} {{ trick.createdBy.lastname }}</strong> le {{ trick.createdBy.createdAt | date('d/m/Y') }}</em>
         </article>
         <hr class="mt-5">
         <article>

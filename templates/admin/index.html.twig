@@ -1,7 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }}-Admin{% endblock %}
-
+{% block title %}{{ parent() }} - Admin{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .add-trick:hover{
+            background-color: #4285f4;
+            transition-duration: .5s;
+        }
+    </style>
+{% endblock %}
 {% block body %}
     <div class="container-for-admin">
         <!--Main layout-->
@@ -43,15 +51,10 @@
                                 </div>
                                 <!--/.Card-->
                                 <!--Card-->
-                                <div class="card bg-primary col-lg-5 mr-2 mb-2 pt-5 pb-5">
-                                    <!--Card content-->
-                                    <div class="card-body text-center">
-                                        <i class="fas fa-snowboarding text-white" style="font-size: 50px"></i>
-                                    </div>
-                                    <div class="text-center">
-                                        <p class="text-white" style="font-size: 30px">88</p>
-                                    </div>
-                                    <a href="#" class="btn btn-indigo">Voir</a>
+                                <div class="card bg-indigo col-lg-5 text-center add-trick">
+                                    <a href="{{ path('trick_new') }}">
+                                        <i class="fa fa-plus text-white" style="font-size: 50px"></i>
+                                    </a>
                                 </div>
                                 <!--/.Card-->
                             </div>
@@ -125,7 +128,7 @@
                                                 <a href="javascript:void(0)">Groupe</a>
                                             </th>
                                             <th class="th-lg">
-                                                <a href="javascript:void(0)">Nombre d'images/videos</a>
+                                                <a href="javascript:void(0)">Slug</a>
                                             </th>
                                             <th class="th-lg">
                                                 <a href="javascript:void(0)">Action</a>
@@ -135,96 +138,23 @@
                                         <!--Table head-->
                                         <!--Table body-->
                                         <tbody>
-                                        <tr>
-                                            <th scope="row">
-                                                <input class="form-check-input" type="checkbox" id="checkbox1">
-                                                <label class="form-check-label label-table" for="checkbox1"></label>
-                                            </th>
-                                            <td>Front flip</td>
-                                            <td>Lorem ipsum.</td>
-                                            <td>Facile</td>
-                                            <td>3</td>
-                                            <td>
-                                                <a href="javascript:void(0)" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
-                                                <a href="javascript:void(0)" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                                <a href="javascript:void(0)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">
-                                                <input class="form-check-input" type="checkbox" id="checkbox2">
-                                                <label class="form-check-label label-table" for="checkbox2"></label>
-                                            </th>
-                                            <td>Back Flip</td>
-                                            <td>Lorem ipsum.</td>
-                                            <td>Facile</td>
-                                            <td>5</td>
-                                            <td>
-                                                <a href="javascript:void(0)" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
-                                                <a href="javascript:void(0)" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                                <a href="javascript:void(0)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">
-                                                <input class="form-check-input" type="checkbox" id="checkbox3">
-                                                <label class="form-check-label label-table" for="checkbox3"></label>
-                                            </th>
-                                            <td>360</td>
-                                            <td>Lorem ipsum.</td>
-                                            <td>Confirmé</td>
-                                            <td>4</td>
-                                            <td>
-                                                <a href="javascript:void(0)" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
-                                                <a href="javascript:void(0)" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                                <a href="javascript:void(0)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">
-                                                <input class="form-check-input" type="checkbox" id="checkbox4">
-                                                <label class="form-check-label label-table" for="checkbox4"></label>
-                                            </th>
-                                            <td>180</td>
-                                            <td>Lorem ipsum.</td>
-                                            <td>Difficile</td>
-                                            <td>5</td>
-                                            <td>
-                                                <a href="javascript:void(0)" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
-                                                <a href="javascript:void(0)" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                                <a href="javascript:void(0)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">
-                                                <input class="form-check-input" type="checkbox" id="checkbox4">
-                                                <label class="form-check-label label-table" for="checkbox4"></label>
-                                            </th>
-                                            <td>180</td>
-                                            <td>Lorem ipsum.</td>
-                                            <td>Difficile</td>
-                                            <td>5</td>
-                                            <td>
-                                                <a href="javascript:void(0)" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
-                                                <a href="javascript:void(0)" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                                <a href="javascript:void(0)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">
-                                                <input class="form-check-input" type="checkbox" id="checkbox4">
-                                                <label class="form-check-label label-table" for="checkbox4"></label>
-                                            </th>
-                                            <td>180</td>
-                                            <td>Lorem ipsum.</td>
-                                            <td>Difficile</td>
-                                            <td>5</td>
-                                            <td>
-                                                <a href="javascript:void(0)" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
-                                                <a href="javascript:void(0)" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                                <a href="javascript:void(0)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                            </td>
-                                        </tr>
+                                        {% for trick in tricks %}
+                                            <tr>
+                                                <th scope="row">
+                                                    <input class="form-check-input" type="checkbox" id="checkbox1">
+                                                    <label class="form-check-label label-table" for="checkbox1"></label>
+                                                </th>
+                                                <td>{{ trick.title | title }}</td>
+                                                <td>{{ trick.description | slice(0, 55) }}...</td>
+                                                <td>{{ trick.trickGroup.title }}</td>
+                                                <td>{{ trick.slug }}</td>
+                                                <td>
+                                                    <a href="{{ path('trick_show', {'slug': trick.slug}) }}" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
+                                                    <a href="{{ path('trick_edit', {'slug': trick.slug}) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
                                         </tbody>
                                         <!--Table body-->
                                     </table>

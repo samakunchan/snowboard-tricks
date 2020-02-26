@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Cocur\Slugify\Slugify;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -9,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Trick
 {
@@ -30,12 +32,12 @@ class Trick
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $images;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $videos;
 
@@ -68,6 +70,7 @@ class Trick
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="tricks")
      */
     private $createdBy;
+
 
     public function __construct()
     {
@@ -210,6 +213,18 @@ class Trick
         return $this;
     }
 
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function initializeSlug()
+    {
+        if(empty($this->slug)){
+            $slugify = new Slugify(); // Don't forget to import class
+            $this->slug= $slugify->slugify($this->title);
+        }
+
+    }
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -257,4 +272,5 @@ class Trick
 
         return $this;
     }
+
 }

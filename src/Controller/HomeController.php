@@ -2,46 +2,22 @@
 
 namespace App\Controller;
 
+use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="home")
+     * @param TrickRepository $trickRepository
+     * @return Response
      */
-    public function index()
+    public function index(TrickRepository $trickRepository): Response
     {
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'tricks' => $trickRepository->findAll(),
         ]);
     }
-    /**
-     * @Route("/single", name="single")
-     */
-    public function single()
-    {
-        return $this->render('home/temporaire/single.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-    /**
-     * @Route("/add", name="add")
-     */
-    public function add()
-    {
-        return $this->render('home/temporaire/add.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-    /**
-     * @Route("/edit", name="edit")
-     */
-    public function edit()
-    {
-        return $this->render('home/temporaire/edit.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-
 }
