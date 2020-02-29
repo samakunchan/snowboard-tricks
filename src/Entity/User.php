@@ -47,6 +47,11 @@ class User implements UserInterface
     private $lastname;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", orphanRemoval=true)
+     */
+    private $comments;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Trick", mappedBy="createdBy")
      */
     private $tricks;
@@ -60,6 +65,7 @@ class User implements UserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
 
     public function __construct()
     {
@@ -91,6 +97,24 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return (string) $this->email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param mixed $comments
+     * @return User
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+        return $this;
     }
 
     /**

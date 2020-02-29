@@ -14,12 +14,12 @@
     <div class="container-for-admin">
         <!--Main layout-->
         <main class="pt-5 row">
-            <div class="container-fluid mt-5" style="max-width: 1440px; margin: 0 auto">
+            <div class="container-fluid mt-5" style="max-width: 1440px; margin: 0 auto; padding: 0 30px">
                 <h1>Administration</h1>
                 <!--Grid row-->
                 <div class="row wow fadeIn">
                     <!--Grid column-->
-                    <div class="col-md-9 mb-4">
+                    <div class="col-md-7 mb-4">
 
                         <!--Card-->
                         <div class="card">
@@ -33,7 +33,7 @@
                                         <i class="fa fa-user text-white" style="font-size: 50px"></i>
                                     </div>
                                     <div class="text-center">
-                                        <p class="text-white" style="font-size: 30px">22</p>
+                                        <p class="text-white" style="font-size: 30px">{{ tricks | length }}</p>
                                     </div>
                                     <a href="{{ path('user_index') }}" class="btn btn-indigo">Voir</a>
                                 </div>
@@ -45,9 +45,9 @@
                                         <i class="fa fa-comment text-white" style="font-size: 50px"></i>
                                     </div>
                                     <div class="text-center">
-                                        <p class="text-white" style="font-size: 30px">136</p>
+                                        <p class="text-white" style="font-size: 30px">{{ comments | length }}</p>
                                     </div>
-                                    <a href="#" class="btn btn-indigo">Voir</a>
+                                    <a href="{{ path('comment_index') }}" class="btn btn-indigo">Voir</a>
                                 </div>
                                 <!--/.Card-->
                                 <!--Card-->
@@ -65,7 +65,7 @@
                     </div>
                     <!--Grid column-->
                     <!--Grid column-->
-                    <div class="col-md-3 mb-4">
+                    <div class="col-md-5 mb-4">
 
                         <!--Card-->
                         <div class="card mb-4">

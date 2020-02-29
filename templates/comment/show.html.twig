@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comment{% endblock %}
+
+{% block body %}
+<div class="container-for-admin">
+    <!--Main layout-->
+    <div class="container-for-admin">
+        <!--Main layout-->
+        <main class="pt-5">
+            <div class="container-fluid mt-5" style="max-width: 1440px; margin: 0 auto">
+            <h1>Comment</h1>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ comment.id }}</td>
+                </tr>
+                <tr>
+                    <th>Author</th>
+                    <td>{{ comment.user.firstname }} {{ comment.user.lastname }}</td>
+                </tr>
+                <tr>
+                    <th>Content</th>
+                    <td>{{ comment.content }}</td>
+                </tr>
+                <tr>
+                    <th>CreatedAt</th>
+                    <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>UpdatedAt</th>
+                    <td>{{ comment.updatedAt ? comment.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <a href="{{ path('comment_index') }}">back to list</a>
+
+
+            {{ include('comment/_delete_form.html.twig') }}
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}

@@ -1,18 +1,4 @@
 $(document).ready(function() {
-    const $container = $("div#trick_videos");
-    let index = $container.find(":input").length;
-    $("#add_video").click(function(e) {
-        addVideo($container);
-        e.preventDefault();
-        return false;
-    });
-    if (index === 0) {
-        addVideo($container);
-    } else {
-        $container.children("div").each(function() {
-            addDeleteLink($(this));
-        });
-    }
     function addVideo($container) {
         const template = $container.attr("data-prototype")
             .replace(/__name__label__/g, "")
@@ -31,4 +17,19 @@ $(document).ready(function() {
             return false;
         });
     }
+    const trickVideo = $("div#trick_videos");
+    let index = trickVideo.find(":input").length;
+    $("#add_video").click(function(e) {
+        addVideo(trickVideo);
+        e.preventDefault();
+        return false;
+    });
+    if (index === 0) {
+        addVideo(trickVideo);
+    } else {
+        trickVideo.children("div").each(function() {
+            addDeleteLink($(this));
+        });
+    }
+
 });

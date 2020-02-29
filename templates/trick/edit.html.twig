@@ -42,9 +42,8 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 form-image">
                                 {{ form_label(form.images, 'Images', {'label_attr': {'style': 'font-weight: bold'}}) }}
                                 {% for image in form.images %}
                                     <div class="previous-img-{{ loop.index -1 }}">
@@ -62,8 +61,7 @@
                                 <a href="javascript:void(0)" id="add_video" class="btn btn-default">Ajouter une video</a>
                             </div>
                         </div>
-
-                        <button class="btn">{{ button_label|default('Save') }}</button>
+                        <button class="btn">{{ button_label|default('Mettre à jour') }}</button>
                         {{ form_end(form) }}
                     </div>
                 </div>
