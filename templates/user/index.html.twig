@@ -57,7 +57,7 @@
                                                 <td>{{ user.createdAt | date }}</td>
                                                 <td>
                                                     <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
-                                                    {% if user.roles[0] is not same as('ROLE_ADMIN') %}
+                                                    {% if user.roles[0] is not same as(app.user is same as(trick.createdBy)) %}
                                                         <a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                                                     {% endif %}
                                                 </td>

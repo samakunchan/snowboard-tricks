@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Comment{% endblock %}
+
+{% block body %}
+<div class="container-for-admin">
+    <!--Main layout-->
+    <div class="container-for-admin">
+        <!--Main layout-->
+        <main class="pt-5">
+            <div class="container-fluid mt-5" style="max-width: 1440px; margin: 0 auto">
+            <h1>Edit Comment</h1>
+
+            {{ include('comment/_form.html.twig', {'button_label': 'Update'}) }}
+
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}
