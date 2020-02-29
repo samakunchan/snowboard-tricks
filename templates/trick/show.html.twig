@@ -4,7 +4,7 @@
 
 {% block body %}
     <!--Carousel Wrapper-->
-    <section style="max-width: 1440px; margin: 50px auto">
+    <section style="max-width: 1440px; margin: 50px auto; padding: 0 15px">
         <h2 class="text-center p-5">{{ trick.title | title }}</h2>
         <article class="row">
             <aside class="col-lg-8">
@@ -66,95 +66,41 @@
         <hr class="mt-5">
         <article>
             <h2>Commentaires</h2>
+            {{ include('comment/_form.html.twig', {'button_label': 'Ajouter'}) }}
             <div class="panel-body">
                 <ul class="list-group">
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-xs-2 col-md-1">
-                                <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div>
-                            <div class="col-xs-10 col-md-11">
-                                <div>
-                                    <a href="http://www.jquery2dotnet.com/2013/10/google-style-login-page-desing-usign.html">
-                                        Google Style Login Page Design Using Bootstrap</a>
-                                    <div class="mic-info">
-                                        By: <a href="#">Bhaumik Patel</a> on 2 Aug 2013
+                    {% for comment in comments %}
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-xs-2 col-md-1">
+                                    <img class="img-circle img-responsive"
+                                         src="https://eu.ui-avatars.com/api/?name={{comment.user.firstname}}+{{comment.user.lastname}}&background=0D8ABC&color=fff"
+                                         alt="Initial de l'utilisateur"
+                                         width="50">
+                                </div>
+                                <div class="col-xs-10 col-md-11">
+                                    <div>
+                                        <div class="mic-info">
+                                            By: <a href="javascript:void(0)">{{comment.user.firstname | title }} {{comment.user.lastname | title }}</a> le  {{ comment.createdAt | date('d/m/Y') }}
+                                            {% if comment.user.roles[0] is same as('ROLE_ADMIN') %}
+                                                <span class="badge badge-primary">Administrateur</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="comment-text">
+                                        {{ comment.content }}
+                                    </div>
+                                    <div class="action d-flex">
+                                        {% if app.user is same as(comment.user) or app.user.roles[0] is same as('ROLE_ADMIN')%}
+                                            {{ include('comment/_delete_form.html.twig') }}
+                                        {% endif %}
+                                        {{ include('comment/_signalement_form.html.twig', {'detail': 'signaled'}) }}
                                     </div>
                                 </div>
-                                <div class="comment-text">
-                                    Awesome design
-                                </div>
-                                <div class="action">
-                                    <button type="button" class="btn btn-primary btn-xs" title="Edit">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-success btn-xs" title="Approved">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-xs" title="Delete">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </button>
-                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-xs-2 col-md-1">
-                                <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div>
-                            <div class="col-xs-10 col-md-11">
-                                <div>
-                                    <a href="http://bootsnipp.com/BhaumikPatel/snippets/Obgj">Admin Panel Quick Shortcuts</a>
-                                    <div class="mic-info">
-                                        By: <a href="#">Bhaumik Patel</a> on 11 Nov 2013
-                                    </div>
-                                </div>
-                                <div class="comment-text">
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                                    euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim
-                                </div>
-                                <div class="action">
-                                    <button type="button" class="btn btn-primary btn-xs" title="Edit">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-success btn-xs" title="Approved">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-xs" title="Delete">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-xs-2 col-md-1">
-                                <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div>
-                            <div class="col-xs-10 col-md-11">
-                                <div>
-                                    <a href="http://bootsnipp.com/BhaumikPatel/snippets/4ldn">Cool Sign Up</a>
-                                    <div class="mic-info">
-                                        By: <a href="#">Bhaumik Patel</a> on 11 Nov 2013
-                                    </div>
-                                </div>
-                                <div class="comment-text">
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                                    euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim
-                                </div>
-                                <div class="action">
-                                    <button type="button" class="btn btn-primary btn-xs" title="Edit">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-success btn-xs" title="Approved">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-xs" title="Delete">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                    {% endfor %}
+
                 </ul>
             </div>
             <nav aria-label="Page navigation example" class="d-flex justify-content-center">

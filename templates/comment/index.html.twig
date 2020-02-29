@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comment index{% endblock %}
+
+{% block body %}
+<div class="container-for-admin">
+    <!--Main layout-->
+    <div class="container-for-admin">
+        <!--Main layout-->
+        <main class="pt-5">
+            <div class="container-fluid mt-5" style="max-width: 1440px; margin: 0 auto">
+                <a href="{{ path('admin') }}" class="btn btn-outline-info btn-rounded my-4 waves-effect ">
+                    Retour
+                </a>
+                <div class="position-relative">
+                    <h1>Tout les commentaires</h1>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Author</th>
+                            <th>Content</th>
+                            <th>CreatedAt</th>
+                            <th>UpdatedAt</th>
+                            <th>Regular</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for comment in comments %}
+                        <tr>
+                            <td>{{ comment.id }}</td>
+                            <td>{{ comment.user.firstname }} {{ comment.user.lastname }}</td>
+                            <td>{{ comment.content }}</td>
+                            <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ comment.updatedAt ? comment.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                            {% if comment.notGoodComment %}
+                                <td class="text-danger">Non conforme</td>
+                            {% else %}
+                                <td>OK</td>
+                            {% endif %}
+
+                            <td>
+                                <form method="post" action="{{ path('comment_signal', {'id': comment.id}) }}">
+                                    <input type="hidden" name="_method" value="POST">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('regular' ~ comment.id) }}">
+                                    <button class="btn btn-success btn-sm" title="Signaler le commentaire"><i class="fas fa-exclamation-triangle"></i></button>
+                                </form>
+
+                                <a href="{{ path('comment_show', {'id': comment.id}) }}" class="btn btn-primary btn-sm">Voir</a>
+                                <a href="{{ path('comment_delete', {'id': comment.id}) }}" class="btn btn-danger btn-sm">Effacer</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}

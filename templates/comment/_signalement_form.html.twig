@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('comment_signal', {'id': comment.id}) }}" onsubmit="return confirm('Voulez vous signaler ce commentaire comme non conforme?');">
+    <input type="hidden" name="_method" value="POST">
+    <input type="hidden" name="_token" value="{{ csrf_token(detail ~ comment.id) }}">
+    <button class="btn btn-primary btn-sm" title="Signaler le commentaire" style="padding: 0 5px"><i class="fas fa-exclamation-triangle"></i></button>
+</form>

@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Trick;
+use App\Form\CommentType;
 use App\Form\TrickType;
-use App\Service\FileService;
+use App\Repository\CommentRepository;
 use DateTime;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,14 +63,32 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", name="trick_show", methods={"GET"})
+     * @Route("/{slug}", name="trick_show", methods={"GET","POST"})
+     * @param Request $request
      * @param Trick $trick
+     * @param CommentRepository $commentRepository
      * @return Response
+     * @throws Exception
      */
-    public function show(Trick $trick): Response
+    public function show(Request $request, Trick $trick, CommentRepository $commentRepository): Response
     {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setUser($this->getUser());
+            $comment->setTrick($trick);
+            $comment->setCreatedAt(new DateTime('now'));
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('trick_show', ['slug' => $trick->getSlug()]);
+        }
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
+            'comments' => $commentRepository->findBy(['trick' => $trick]),
+            'form' => $form->createView()
         ]);
     }
 
@@ -115,16 +135,12 @@ class TrickController extends AbstractController
      * @Route("/{id}", name="trick_delete", methods={"DELETE"})
      * @param Request $request
      * @param Trick $trick
-     * @param FileService $fileService
      * @return Response
      */
-    public function delete(Request $request, Trick $trick, FileService $fileService): Response
+    public function delete(Request $request, Trick $trick): Response
     {
         if ($this->isCsrfTokenValid('delete'.$trick->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            foreach ($trick->getImages() as $image){
-                $fileService->deleteImageDir($image);
-            }
             $entityManager->remove($trick);
             $entityManager->flush();
         }

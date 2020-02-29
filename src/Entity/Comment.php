@@ -18,9 +18,9 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
      */
-    private $author;
+    private $user;
 
     /**
      * @ORM\Column(type="text", length=255)
@@ -28,7 +28,7 @@ class Comment
     private $content;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
 
@@ -42,21 +42,16 @@ class Comment
      */
     private $trick;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $notGoodComment;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(string $author): self
-    {
-        $this->author = $author;
-
-        return $this;
     }
 
     public function getContent(): ?string
@@ -106,4 +101,29 @@ class Comment
 
         return $this;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getNotGoodComment(): ?bool
+    {
+        return $this->notGoodComment;
+    }
+
+    public function setNotGoodComment(?bool $notGoodComment): self
+    {
+        $this->notGoodComment = $notGoodComment;
+
+        return $this;
+    }
+
 }
