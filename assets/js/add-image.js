@@ -22,7 +22,7 @@ $(document).ready(function() {
         });
     }
     const trickImages = $("div#trick_images");
-    let indexImg = trick_images.find(":input").length;
+    let indexImg = trickImages.find(":input").length;
     $("#add_image").click(function(e) {
 
         addImage(trickImages);
