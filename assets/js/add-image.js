@@ -21,6 +21,7 @@ $(document).ready(function() {
             return false;
         });
     }
+
     const trickImages = $("div#trick_images");
     let indexImg = trickImages.find(":input").length;
     $("#add_image").click(function(e) {
