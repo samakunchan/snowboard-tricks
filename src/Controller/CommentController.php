@@ -25,8 +25,11 @@ class CommentController extends AbstractController
             'comments' => $commentRepository->findAll(),
         ]);
     }
+
     /**
      * @Route("/admin/{id}", name="comment_show", methods={"GET"})
+     * @param Comment $comment
+     * @return Response
      */
     public function show(Comment $comment): Response
     {

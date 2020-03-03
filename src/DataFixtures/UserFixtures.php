@@ -28,11 +28,7 @@ class UserFixtures extends Fixture
             $user->setEmail(strtolower($name[$i].'@test.fr'));
             $hash = $this->encoder->encodePassword($user, strtolower($name[$i]));
             $user->setPassword($hash);
-            if ($name[$i] === 'Sam'){
-                $user->setRoles(['ROLE_ADMIN']);
-            } else {
-                $user->setRoles(['ROLE_USER']);
-            }
+            $name[$i] === 'Sam' ?  $user->setRoles(['ROLE_ADMIN']) : $user->setRoles(['ROLE_USER']);
             try {
                 $user->setCreatedAt(new DateTime('now'));
             } catch (Exception $e) {

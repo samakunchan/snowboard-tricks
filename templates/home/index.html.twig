@@ -5,14 +5,15 @@
 {% block body %}
     {% include 'home/caroussel.html.twig' %}
     <!--Main layout-->
-    <main>
+    <div id="target" style="position: relative; top: -55px"></div>
+    <main id="main">
         <div class="container">
             <section class="mt-5 wow fadeIn">
                 <h2 class="text-center mb-5">Listes des figures</h2>
                 <div class="row">
-                    {% for trick in tricks %}
+                    {% for trick in tricks  %}
                         <!--Grid column-->
-                        <article class="col-lg-4 col-md-12 mb-4">
+                        <article class="col-lg-3 col-md-12 mb-4">
                             <!--Card-->
                             <div class="card">
                                 <!--Card image-->
@@ -22,7 +23,7 @@
                                     {% else %}
                                          <img src="http://placehold.it/300x200" class="card-img-top" alt="placehold.it">
                                     {% endif %}
-                                    <a href="{{ path('trick_show', {'slug': trick.slug}) }}">
+                                       <a href="{{ path('trick_show', {'slug': trick.slug}) }}">
                                         <div class="mask rgba-white-slight"></div>
                                     </a>
                                 </div>
@@ -31,12 +32,12 @@
                                     <!--Title-->
                                     <h4 class="card-title">{{ trick.title }}</h4>
                                     <!--Text-->
-                                    <a href="{{ path('trick_show', {'slug': trick.slug}) }}" class="btn btn-indigo">Voir la figure</a>
-                                    <p class="card-text p-2">{{ trick.description | slice(0, 100) }}...</p>
+                                    <a href="{{ path('trick_show', {'slug': trick.slug}) }}" class="btn btn-indigo btn-sm">Voir la figure</a>
+
                                     {% if app.user %}
                                         {% if app.user is same as(trick.createdBy) or app.user.roles[0] is same as('ROLE_ADMIN')%}
                                             <div class="d-flex justify-content-end">
-                                                <a href="{{ path('trick_edit', {'slug': trick.slug}) }}" class="btn btn-info"><i class="fa fa-pen"></i></a>
+                                                <a href="{{ path('trick_edit', {'slug': trick.slug}) }}" class="btn btn-info btn-sm"><i class="fa fa-pen"></i></a>
                                                 {{ include('trick/_delete_form.html.twig') }}
                                             </div>
                                         {% endif %}
@@ -50,23 +51,39 @@
 
                     {% endfor %}
                 </div>
-                <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-                    <ul class="pagination pg-blue">
-                        <li class="page-item disabled">
-                            <a class="page-link" tabindex="-1">Previous</a>
-                        </li>
-                        <li class="page-item"><a class="page-link">1</a></li>
-                        <li class="page-item active">
-                            <a class="page-link">2 <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="page-item"><a class="page-link">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link">Next</a>
-                        </li>
-                    </ul>
-                </nav>
+                <div id="more" class="row"></div>
+                <button class="btn btn-primary" id="loadmore">Voir plus de figures</button>
+
             </section>
         </div>
     </main>
     <!--Main layout-->
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.getElementById("scrollTo").addEventListener("click", ()=> {
+            document.getElementById("target").scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
+        })
+    </script>
+    <script>
+        $(document).ready(function(){
+            let count = 0   ;
+            $("#loadmore").on("click", function(){
+                count += 4;
+                $.ajax({
+                    url: "{{ path('home')}}",
+                    type: 'GET',
+                    data: { row : count },
+                    dataType: "json",
+                    success: function (data) {
+                        $("#more").append(data.view);
+                    },
+                    error : function() {
+                        alert('Un problème est survenu lors du chargement des figures.');
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}

@@ -68,7 +68,7 @@
             <h2>Commentaires</h2>
             {{ include('comment/_form.html.twig', {'button_label': 'Ajouter'}) }}
             <div class="panel-body">
-                <ul class="list-group">
+                <ul id="more" class="list-group">
                     {% for comment in comments %}
                         <li class="list-group-item">
                             <div class="row">
@@ -100,24 +100,32 @@
                             </div>
                         </li>
                     {% endfor %}
-
                 </ul>
+                <button class="btn btn-primary" id="loadmore">Voir plus de commentaires</button>
             </div>
-            <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-                <ul class="pagination pg-blue">
-                    <li class="page-item disabled">
-                        <a class="page-link" tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link">1</a></li>
-                    <li class="page-item active">
-                        <a class="page-link">2 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="page-item"><a class="page-link">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link">Next</a>
-                    </li>
-                </ul>
-            </nav>
         </article>
     </section>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            let count = 0   ;
+            $("#loadmore").on("click", function(){
+                count += 1;
+                $.ajax({
+                    url: "{{ path('trick_show', {'slug': trick.slug})}}",
+                    type: 'GET',
+                    data: { row : count },
+                    dataType: "json",
+                    success: function (data) {
+                        $("#more").append(data.view);
+                    },
+                    error : function() {
+                        alert('Un problème est survenu lors du chargement des commentaires.');
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}
