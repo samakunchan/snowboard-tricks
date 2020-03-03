@@ -110,13 +110,13 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         ];
     }
 
-    public function buildImages($trick, $tricks, $i, $j)
+    public function buildImages($trick, $tricks, $iindex, $jindex)
     {
         $image = new Image();
-        $image->setAlt(substr(self::FIXTURES_IMAGE_DIR.$tricks[$i]['title'].($j +1), 0, -3));
+        $image->setAlt(substr(self::FIXTURES_IMAGE_DIR.$tricks[$iindex]['title'].($jindex +1), 0, -3));
         $image->setExt('jpg');
 
-        $file = new File(self::FIXTURES_IMAGE_DIR.$tricks[$i]['title'].($j +1).'.'.$image->getExt());
+        $file = new File(self::FIXTURES_IMAGE_DIR.$tricks[$iindex]['title'].($jindex +1).'.'.$image->getExt());
 
         $originalFilename = pathinfo($file->getFilename(), PATHINFO_FILENAME);
         $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
@@ -128,10 +128,10 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
         $trick->addImage($image);
     }
 
-    public function buildVideos($trick, $tricks, $trick_video, $key, $i)
+    public function buildVideos($trick, $tricks, $trick_video, $key, $iindex)
     {
         $video = new Video();
-        $video->setTitle($tricks[$i]['title']. ' video '. $key);
+        $video->setTitle($tricks[$iindex]['title']. ' video '. $key);
         $video->setSrc($trick_video);
         $video->setCreatedAt(new DateTime('now'));
         $video->setTrick($trick);
