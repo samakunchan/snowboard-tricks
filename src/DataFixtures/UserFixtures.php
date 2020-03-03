@@ -13,6 +13,7 @@ class UserFixtures extends Fixture
 {
 
     private $encoder;
+    public const ADMIN_USER_REFERENCE = 'moi-meme';
 
     public function __construct(UserPasswordEncoderInterface $encoder)
     {
@@ -34,8 +35,18 @@ class UserFixtures extends Fixture
             } catch (Exception $e) {
             }
             $manager->persist($user);
-        }
 
+        }
+        // Pour la référence, qui sera utiliser dans le TrickFixtures
+        $user = new User();
+        $user->setFirstname('cedric');
+        $user->setLastname('badjah');
+        $user->setEmail(strtolower('cedric@test.fr'));
+        $user->setRoles(['ROLE_ADMIN']);
+        $hash = $this->encoder->encodePassword($user, strtolower('123'));
+        $user->setPassword($hash);
+        $user->setCreatedAt(new DateTime('now'));
+        $this->addReference(self::ADMIN_USER_REFERENCE, $user);
         $manager->flush();
     }
 }
