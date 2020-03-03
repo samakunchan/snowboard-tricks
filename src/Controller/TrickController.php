@@ -10,6 +10,7 @@ use App\Repository\CommentRepository;
 use DateTime;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -85,9 +86,15 @@ class TrickController extends AbstractController
 
             return $this->redirectToRoute('trick_show', ['slug' => $trick->getSlug()]);
         }
+        if ($request->isXmlHttpRequest()) {
+            $row = $request->query->get('row');
+            return new JsonResponse([
+                'view'    => $this->renderView('comment/more.html.twig', [ 'comments' => $commentRepository->findBy(['trick' => $trick], null, 1, $row),])
+            ]);
+        }
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
-            'comments' => $commentRepository->findBy(['trick' => $trick]),
+            'comments' => $commentRepository->findBy(['trick' => $trick], null, 1, 0),
             'form' => $form->createView()
         ]);
     }

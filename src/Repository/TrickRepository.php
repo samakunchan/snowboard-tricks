@@ -19,6 +19,21 @@ class TrickRepository extends ServiceEntityRepository
         parent::__construct($registry, Trick::class);
     }
 
+    /**
+     * Méthode avec uns limit personnalisé
+     * @param int $offset
+     * @return mixed
+     */
+    public function findAllLimit(int $offset)
+    {
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.id', 'DESC')
+            ->setFirstResult( $offset )
+            ->setMaxResults( 4 )
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     // /**
     //  * @return Trick[] Returns an array of Trick objects
     //  */
