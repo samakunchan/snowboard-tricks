@@ -24,4 +24,4 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 /public/uploads/
 /src/Migrations/
-/src/DataFixtures/files/
+

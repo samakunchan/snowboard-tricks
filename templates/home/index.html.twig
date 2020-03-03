@@ -19,7 +19,7 @@
                                 <!--Card image-->
                                 <div class="view overlay">
                                     {% if trick.images %}
-                                        <img src="{{ asset('uploads/'~ trick.images[0].completeUrl) }}" alt="Image de présentation" class="card-img-top">
+                                        <img src="{{ asset('uploads/'~ trick.images[0].completeUrl) }}" alt="Image de présentation" class="card-img-top" width="100">
                                     {% else %}
                                          <img src="http://placehold.it/300x200" class="card-img-top" alt="placehold.it">
                                     {% endif %}
