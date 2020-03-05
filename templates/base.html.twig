@@ -32,25 +32,58 @@
                     <!-- Left -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home
+                            <a class="nav-link" href="{{ path('home') }}">Home
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('login') }}">Authentification</a>
-                        </li>
+                        {% if not app.user %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('login') }}">Authentification</a>
+                            </li>
+                        {% endif %}
                     </ul>
                     {% if app.user %}
                         <!-- Right -->
-                        <ul class="navbar-nav nav-flex-icons">
-                            <li class="nav-item">
-                                <a href="{{ path('profil') }}">
-                                    <img
+                        <ul class="navbar-nav nav-flex-icons d-none d-lg-block">
+                            <li class="nav-item ">
+                                <button class="btn btn-primary btn-sm p-0" type="button" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false"><img
                                             class="rounded"
                                             src="https://eu.ui-avatars.com/api/?name={{app.user.firstname}}+{{app.user.lastname}}&background=0D8ABC&color=fff"
                                             alt="Initial de l'utilisateur"
                                             width="50">
-                                </a>
+                                </button>
+
+                                <div class="dropdown-menu" style="right: 0; left: unset">
+                                    <a class="dropdown-item" href="{{ path('profil') }}"><strong>Profil</strong></a>
+                                    <a class="dropdown-item" href="{{ path('trick_new') }}">Créer une figure</a>
+                                    {% if app.user %}
+                                        {% if app.user.roles[0] is same as('ROLE_ADMIN') %}
+                                            <a class="dropdown-item" href="{{ path('admin') }}">Administration</a>
+                                        {% endif %}
+                                    {% endif %}
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ path('logout') }}"><strong>Deconnexion</strong></a>
+                                </div>
+
+                            </li>
+                        </ul>
+                        <ul class="d-block d-lg-none">
+                            <li class="list-group">
+                                <a class="dropdown-item text-white" href="{{ path('profil') }}"><strong>Profil</strong></a>
+                            </li>
+                            <li class="list-group">
+                                <a class="dropdown-item text-white" href="{{ path('trick_new') }}">Créer une figure</a>
+                            </li>
+                            <li class="list-group">
+                                {% if app.user %}
+                                    {% if app.user.roles[0] is same as('ROLE_ADMIN') %}
+                                        <a class="dropdown-item text-white" href="{{ path('admin') }}">Administration</a>
+                                    {% endif %}
+                                {% endif %}
+                            </li>
+                            <li class="list-group">
+                                <a class="dropdown-item text-white" href="{{ path('logout') }}"><strong>Deconnexion</strong></a>
                             </li>
                         </ul>
                     {% endif %}
@@ -64,48 +97,32 @@
             <!--Call to action-->
             <div class="pt-4">
                 <a class="btn btn-outline-white" href="https://mdbootstrap.com/docs/jquery/getting-started/download/"
-                   role="button">Download MDB
+                   role="button">Theme utilisé: MDB
                     <i class="fas fa-download ml-2"></i>
                 </a>
-                <a class="btn btn-outline-white" href="https://mdbootstrap.com/education/bootstrap/" role="button">Start
-                    free tutorial
-                    <i class="fas fa-graduation-cap ml-2"></i>
+                <a class="btn btn-outline-white" href="https://github.com/samakunchan" role="button" target="_blank">Repositories
+                    <i class="fab fa-github ml-2"></i>
+                </a>
+                <a class="btn btn-outline-white" href="https://my-services.samakunchan.fr" role="button" target="_blank">Mon site web
+                    <i class="fab fa-dev ml-2"></i>
                 </a>
             </div>
             <!--/.Call to action-->
             <hr class="my-4">
             <!-- Social icons -->
             <div class="pb-4">
-                <a href="https://www.facebook.com/mdbootstrap">
-                    <i class="fab fa-facebook-f mr-3"></i>
+                <a href="https://www.linkedin.com/in/cedric-badjah-9646b3141/" target="_blank">
+                    <i class="fab fa-linkedin mr-3"></i>
                 </a>
-                <a href="https://twitter.com/MDBootstrap">
-                    <i class="fab fa-twitter mr-3"></i>
-                </a>
-                <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4">
-                    <i class="fab fa-youtube mr-3"></i>
-                </a>
-                <a href="https://plus.google.com/u/0/b/107863090883699620484">
-                    <i class="fab fa-google-plus-g mr-3"></i>
-                </a>
-                <a href="https://dribbble.com/mdbootstrap">
-                    <i class="fab fa-dribbble mr-3"></i>
-                </a>
-                <a href="https://pinterest.com/mdbootstrap">
-                    <i class="fab fa-pinterest mr-3"></i>
-                </a>
-                <a href="https://github.com/mdbootstrap/bootstrap-material-design">
+                <a href="https://github.com/samakunchan" target="_blank">
                     <i class="fab fa-github mr-3"></i>
                 </a>
-                <a href="http://codepen.io/mdbootstrap/">
-                    <i class="fab fa-codepen mr-3"></i>
-                </a>
+                <a href="https://www.malt.fr/profile/cedricbadjah" target="_blank">Malt</a>
             </div>
             <!-- Social icons -->
             <!--Copyright-->
             <div class="footer-copyright py-3">
-                © 2018 Copyright:
-                <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com </a>
+                © {{ 'now'|date('Y') }} Copyright: <a href="https://my-services.samakunchan.fr" target="_blank">Samakunchan Technology</a>
             </div>
             <!--/.Copyright-->
         </footer>

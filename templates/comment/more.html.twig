@@ -19,12 +19,14 @@
                 <div class="comment-text">
                     {{ comment.content }}
                 </div>
-                <div class="action d-flex">
-                    {% if app.user is same as(comment.user) or app.user.roles[0] is same as('ROLE_ADMIN')%}
-                        {{ include('comment/_delete_form.html.twig') }}
-                    {% endif %}
-                    {{ include('comment/_signalement_form.html.twig', {'detail': 'signaled'}) }}
-                </div>
+                {% if app.user %}
+                    <div class="action d-flex">
+                        {% if app.user is same as(comment.user) or app.user.roles[0] is same as('ROLE_ADMIN')%}
+                            {{ include('comment/_delete_form.html.twig') }}
+                        {% endif %}
+                        {{ include('comment/_signalement_form.html.twig', {'detail': 'signaled'}) }}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </li>

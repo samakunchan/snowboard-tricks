@@ -22,14 +22,15 @@ class TrickRepository extends ServiceEntityRepository
     /**
      * Méthode avec uns limit personnalisé
      * @param int $offset
+     * @param int $maxResult
      * @return mixed
      */
-    public function findAllLimit(int $offset)
+    public function findAllLimit(int $offset, int $maxResult)
     {
         return $this->createQueryBuilder('t')
             ->orderBy('t.id', 'DESC')
             ->setFirstResult( $offset )
-            ->setMaxResults( 4 )
+            ->setMaxResults( $maxResult )
             ->getQuery()
             ->getResult()
             ;
