@@ -6,7 +6,7 @@
     {% include 'home/caroussel.html.twig' %}
     <!--Main layout-->
     <div id="target" style="position: relative; top: -55px"></div>
-    <main id="main">
+    <main id="main" style="position: relative;">
         <div class="container">
             <section class="mt-5 wow fadeIn">
                 <h2 class="text-center mb-5">Listes des figures</h2>
@@ -56,6 +56,7 @@
 
             </section>
         </div>
+        <button id="scrollToTop" class="btn btn-success btn-sm" style="position: absolute; bottom: 0; z-index: 100;right: 0;"><i class="fas fa-angle-up" style="font-size: 20px"></i></button>
     </main>
     <!--Main layout-->
 {% endblock %}
@@ -64,13 +65,16 @@
     <script>
         document.getElementById("scrollTo").addEventListener("click", ()=> {
             document.getElementById("target").scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
-        })
+        });
+        document.getElementById("scrollToTop").addEventListener("click", ()=> {
+            document.getElementById("target").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
+        });
     </script>
     <script>
         $(document).ready(function(){
             let count = 0   ;
             $("#loadmore").on("click", function(){
-                count += 4;
+                count += {{ trickToShow }};
                 $.ajax({
                     url: "{{ path('home')}}",
                     type: 'GET',

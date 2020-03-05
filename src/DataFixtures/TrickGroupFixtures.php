@@ -9,6 +9,9 @@ use Doctrine\Persistence\ObjectManager;
 
 class TrickGroupFixtures extends Fixture
 {
+    public const GROUP_ROTATION = 'Rotation';
+    public const GROUP_GRAB = 'Grab';
+    public const GROUP_FLIP = 'Flip';
     public function load(ObjectManager $manager)
     {
         $groups = [
@@ -26,6 +29,15 @@ class TrickGroupFixtures extends Fixture
             $trickGroup->setIcone($groups[$i]['icon']);
 
             $manager->persist($trickGroup);
+            if ($groups[$i]['title'] === 'Rotation') {
+                $this->addReference(self::GROUP_ROTATION, $trickGroup);
+            }
+            if ($groups[$i]['title'] === 'Grab') {
+                $this->addReference(self::GROUP_GRAB, $trickGroup);
+            }
+            if ($groups[$i]['title'] === 'Flip') {
+                $this->addReference(self::GROUP_FLIP, $trickGroup);
+            }
         }
         $manager->flush();
     }

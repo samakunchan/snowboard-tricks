@@ -38,10 +38,13 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             foreach ($tricks[$i]['videos'] as $key => $trick_video) {
                 $this->buildVideos($trick, $tricks, $trick_video, $key, $i);
             }
-            $trickGroup = new TrickGroup();
-            $trickGroup->setTitle($tricks[$i]['group'][0]);
-            $trickGroup->setIcone($tricks[$i]['group'][1]);
-            $trick->setTrickGroup($trickGroup);
+            if ($i <= 2) {
+                $trick->setTrickGroup($this->getReference(TrickGroupFixtures::GROUP_ROTATION));
+            } elseif ($i >2 && $i <= 4) {
+                $trick->setTrickGroup($this->getReference(TrickGroupFixtures::GROUP_GRAB));
+            } else {
+                $trick->setTrickGroup($this->getReference(TrickGroupFixtures::GROUP_FLIP));
+            }
             $trick->setCreatedBy($this->getReference(UserFixtures::ADMIN_USER_REFERENCE));
             $trick->setCreatedAt(new DateTime('now'));
             $manager->persist($trick);
@@ -52,7 +55,7 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies()
     {
-        return [UserFixtures::class];
+        return [TrickGroupFixtures::class,UserFixtures::class];
     }
 
     public function getDataForTricks()
@@ -61,49 +64,42 @@ class TrickFixtures extends Fixture implements DependentFixtureInterface
             [
                 'title' => 'mute',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi dolore eum facilis, ipsa iure laboriosam laborum laudantium libero molestias nisi odio repellendus reprehenderit tempore unde vel. Earum magnam mollitia officia.',
-                'group' => ['Rotation', 'https://image.flaticon.com/icons/svg/2503/2503652.svg'],
                 'images' => 2,
                 'videos' => []
             ],
             [
                 'title' => 'stalefish',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi dolore eum facilis, ipsa iure laboriosam laborum laudantium libero molestias nisi odio repellendus reprehenderit tempore unde vel. Earum magnam mollitia officia.',
-                'group' => ['Rotation', 'https://image.flaticon.com/icons/svg/2503/2503652.svg'],
                 'images' => 3,
                 'videos' => ['f9FjhCt_w2U']
             ],
             [
                 'title' => 'indy',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi dolore eum facilis, ipsa iure laboriosam laborum laudantium libero molestias nisi odio repellendus reprehenderit tempore unde vel. Earum magnam mollitia officia.',
-                'group' => ['Rotation', 'https://image.flaticon.com/icons/svg/2503/2503652.svg'],
                 'images' => 2,
                 'videos' => ['iKkhKekZNQ8', '6yA3XqjTh_w'],
             ],
             [
                 'title' => 'sad',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi dolore eum facilis, ipsa iure laboriosam laborum laudantium libero molestias nisi odio repellendus reprehenderit tempore unde vel. Earum magnam mollitia officia.',
-                'group' => ['Grab', 'https://image.flaticon.com/icons/svg/625/625271.svg'],
                 'images' => 2,
                 'videos' => ['KEdFwJ4SWq4']
             ],
             [
                 'title' => 'japan',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi dolore eum facilis, ipsa iure laboriosam laborum laudantium libero molestias nisi odio repellendus reprehenderit tempore unde vel. Earum magnam mollitia officia.',
-                'group' => ['Grab', 'https://image.flaticon.com/icons/svg/625/625271.svg'],
                 'images' => 2,
                 'videos' => ['CzDjM7h_Fwo']
             ],
             [
                 'title' => 'frontflip',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi dolore eum facilis, ipsa iure laboriosam laborum laudantium libero molestias nisi odio repellendus reprehenderit tempore unde vel. Earum magnam mollitia officia.',
-                'group' => ['Flip', 'https://image.flaticon.com/icons/svg/37/37542.svg'],
                 'images' => 3,
                 'videos' => ['gMfmjr-kuOg']
             ],
             [
                 'title' => 'backflip',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi dolore eum facilis, ipsa iure laboriosam laborum laudantium libero molestias nisi odio repellendus reprehenderit tempore unde vel. Earum magnam mollitia officia.',
-                'group' => ['Flip', 'https://image.flaticon.com/icons/svg/37/37542.svg'],
                 'images' => 2,
                 'videos' => ['W853WVF5AqI']
             ],

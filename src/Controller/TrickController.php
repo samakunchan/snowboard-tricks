@@ -86,15 +86,17 @@ class TrickController extends AbstractController
 
             return $this->redirectToRoute('trick_show', ['slug' => $trick->getSlug()]);
         }
+        $commentToShow = 3;
         if ($request->isXmlHttpRequest()) {
             $row = $request->query->get('row');
             return new JsonResponse([
-                'view'    => $this->renderView('comment/more.html.twig', [ 'comments' => $commentRepository->findBy(['trick' => $trick], null, 1, $row),])
+                'view'    => $this->renderView('comment/more.html.twig', [ 'comments' => $commentRepository->findBy(['trick' => $trick], null, 3, $row),])
             ]);
         }
         return $this->render('trick/show.html.twig', [
             'trick' => $trick,
-            'comments' => $commentRepository->findBy(['trick' => $trick], null, 1, 0),
+            'commentToShow' => $commentToShow,
+            'comments' => $commentRepository->findBy(['trick' => $trick], ['createdAt' => 'DESC'], 3, 0),
             'form' => $form->createView()
         ]);
     }

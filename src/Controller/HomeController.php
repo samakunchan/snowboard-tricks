@@ -19,15 +19,16 @@ class HomeController extends AbstractController
      */
     public function index(Request $request, TrickRepository $trickRepository): Response
     {
+        $trickToShow = 4;
         if ($request->isXmlHttpRequest()) {
-            // 'row' vient de 'data: { row : count }' dans la requete ajax de index.html.twig
             $row = $request->query->get('row');
             return new JsonResponse([
-                'view'    => $this->renderView('trick/more.html.twig', [ 'tricks' => $trickRepository->findAllLimit($row)])
+                'view'    => $this->renderView('trick/more.html.twig', [ 'tricks' => $trickRepository->findAllLimit($row, $trickToShow)])
             ]);
         }
         return $this->render('home/index.html.twig', [
-            'tricks' => $trickRepository->findAllLimit(0), // Changer de FindAll pour ne pas tout afficher de base. Cette un findAll construit à la main (voir TrickRepository)
+            'tricks' => $trickRepository->findAllLimit(0, $trickToShow),
+            'trickToShow' => $trickToShow
         ]);
     }
 }

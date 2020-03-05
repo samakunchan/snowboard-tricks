@@ -5,9 +5,9 @@
 {% block body %}
     <!--Carousel Wrapper-->
     <section style="max-width: 1440px; margin: 50px auto; padding: 0 15px">
-        <h2 class="text-center p-5">{{ trick.title | title }}</h2>
+        <h2 class="text-center p-5 d-none d-sm-block">{{ trick.title | title }}</h2>
         <article class="row">
-            <aside class="col-lg-8">
+            <aside class="col-lg-8 d-none d-sm-block">
                 <!--Carousel Wrapper-->
                 <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel" style="height: unset;">
                     <!--Slides-->
@@ -44,29 +44,68 @@
                 </div>
                 <!--/.Carousel Wrapper-->
                 <!--/.Controls-->
-                <ol class="d-flex justify-content-center list-inline single-trick-indicator p-3">
+                <ol class="d-flex justify-content-center list-inline single-trick-indicator p-3 ">
                     {% for image in trick.images %}
-                        <li data-target="#carousel-thumb" data-slide-to="{{ loop.index -1 }}" class="active">
+                        <li data-target="#carousel-thumb" data-slide-to="{{ loop.index -1 }}" class="active ">
                             <img src="{{ asset('uploads/' ~ image.completeUrl) }}" width="200" alt="Indicator{{ loop.index }}">
                         </li>
                     {% endfor %}
                     {% for video in trick.videos %}
-                        <li data-target="#carousel-thumb" data-slide-to="{{ (loop.index -1) + trick.images | length }}" class="active">
+                        <li data-target="#carousel-thumb" data-slide-to="{{ (loop.index -1) + trick.images | length }}" class="active ">
                             <img src="https://img.youtube.com/vi/{{ video.src }}/default.jpg" width="200" alt="Indicator video {{ video.title }}">
                         </li>
                     {% endfor %}
                 </ol>
+                <div class="text-center w-100 pb-3 d-block d-sm-none">
+                    <button class="btn text-center">Voir les medias</button>
+                </div>
+            </aside>
+            <aside class="col-lg-12 d-block d-sm-none">
+                <div class="d-block d-sm-none mt-3" style="position: relative; background: url('{{ asset('uploads/' ~ trick.images[0].completeUrl) }}')center top/cover; height: 220px;">
+                    <h2 class="text-center w-100 text-white" style="position: absolute; top: 30%; transform: translateY(30%);">{{ trick.title | title }}</h2>
+                </div>
+                <ul id="media" class="p-0 d-none">
+                    {% for image in trick.images %}
+                        <li class="list-group">
+                            <img class="d-block w-100" src="{{ asset('uploads/' ~ image.completeUrl) }}" alt="slide{{ loop.index }}">
+                        </li>
+                    {% endfor %}
+                    {% for video in trick.videos %}
+                        <li class="list-group">
+                            <iframe width="400"
+                                    height="400"
+                                    src="https://www.youtube.com/embed/{{ video.src }}"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="text-center w-100">
+                    <button id="seeMediaBtn" class="btn">Voir les medias</button>
+                    <button id="hideMediaBtn" class="btn d-none">Cacher les medias</button>
+                </div>
             </aside>
             <div class="col-lg-4">
-                <h2>Description</h2>
-                <div class="description">{{ trick.description }}</div>
+                <h2 class="text-center">Description</h2>
+                <div class="description text-justify">{{ trick.description }}</div>
             </div>
-            <em>Par: <strong>{{ trick.createdBy.firstname }} {{ trick.createdBy.lastname }}</strong> le {{ trick.createdBy.createdAt | date('d/m/Y') }}</em>
+            <div class="w-100">
+                <em>Par: <strong>{{ trick.createdBy.firstname }} {{ trick.createdBy.lastname }}</strong> le {{ trick.createdBy.createdAt | date('d/m/Y') }}</em>
+                <br>
+                <em>Groupe: {{ trick.trickGroup.title }}</em>
+                <br>
+                {% if trick.updatedAt %}
+                    <em>Dernière mise à jour: {{ trick.updatedAt | date('d/m/Y') }}</em>
+                {% endif %}
+            </div>
         </article>
         <hr class="mt-5">
         <article>
             <h2>Commentaires</h2>
-            {{ include('comment/_form.html.twig', {'button_label': 'Ajouter'}) }}
+            {% if app.user %}
+                {{ include('comment/_form.html.twig', {'button_label': 'Ajouter'}) }}
+            {% endif %}
             <div class="panel-body">
                 <ul id="more" class="list-group">
                     {% for comment in comments %}
@@ -90,12 +129,14 @@
                                     <div class="comment-text">
                                         {{ comment.content }}
                                     </div>
-                                    <div class="action d-flex">
-                                        {% if app.user is same as(comment.user) or app.user.roles[0] is same as('ROLE_ADMIN')%}
-                                            {{ include('comment/_delete_form.html.twig') }}
-                                        {% endif %}
-                                        {{ include('comment/_signalement_form.html.twig', {'detail': 'signaled'}) }}
-                                    </div>
+                                    {% if app.user %}
+                                        <div class="action d-flex">
+                                            {% if app.user is same as(comment.user) or app.user.roles[0] is same as('ROLE_ADMIN')%}
+                                                {{ include('comment/_delete_form.html.twig') }}
+                                            {% endif %}
+                                            {{ include('comment/_signalement_form.html.twig', {'detail': 'signaled'}) }}
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </li>
@@ -110,9 +151,23 @@
     {{ parent() }}
     <script>
         $(document).ready(function(){
+            $("#seeMediaBtn").on("click", function () {
+                $("#media").removeClass( ["d-none" ] );
+                $("#hideMediaBtn").removeClass( ["d-none" ] );
+                $("#seeMediaBtn").addClass( ["d-none" ] );
+            });
+            $("#hideMediaBtn").on("click", function () {
+                $("#media").addClass( ["d-none" ] );
+                $("#hideMediaBtn").addClass( ["d-none" ] );
+                $("#seeMediaBtn").removeClass( ["d-none" ] );
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
             let count = 0   ;
             $("#loadmore").on("click", function(){
-                count += 1;
+                count += {{ commentToShow }};
                 $.ajax({
                     url: "{{ path('trick_show', {'slug': trick.slug})}}",
                     type: 'GET',
