@@ -43,7 +43,7 @@ $(document).ready(function() {
         });
     }
 
-    $.each($(".image-edit"),function (index) {
+    $.each($(".image-edit"), function (index) {
         const trickImagesLoop = $("#trick_images_" + index);
 
         let indexImg = trickImagesLoop.find(":input").length;
